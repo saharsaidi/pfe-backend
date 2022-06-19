@@ -30,6 +30,9 @@ class AuthController extends Controller {
             'password' => 'required|string|min:6',
         ]);
 
+        $users = User::where('role' , 'drh')->get();
+
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -39,8 +42,8 @@ class AuthController extends Controller {
         }
         $user = User::where('email' , $request->input('email'))->first();
 
-       /*  return $this->createNewToken($token); */
-       return $user;
+      return response()->json(['token' =>$this->createNewToken($token) , 'user'=>$user]);
+
     }
 
     /**

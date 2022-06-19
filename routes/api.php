@@ -14,29 +14,37 @@ use App\Http\Controllers\AuthController;
 
 
 
-Route::prefix('salarie')->group(function () {
+Route::prefix('users')->group(function () {
     Route::get('/',[ SalarieController::class, 'getAll']);
     Route::post('/',[ SalarieController::class, 'create']);
     Route::delete('/{id}',[ SalarieController::class, 'delete']);
+    Route::get('/statistic',[ SalarieController::class, 'statistiques']);
     Route::get('/{id}',[ SalarieController::class, 'get']);
+    Route::post('/upload',[ SalarieController::class, 'upload']);
     Route::put('/{id}',[ SalarieController::class, 'update']);
+
 });
 Route::prefix('poste')->group(function () {
     Route::get('/',[ PosteController::class, 'getAll']);
     Route::post('/',[ PosteController::class, 'create']);
     Route::delete('/{id}',[ PosteController::class, 'delete']);
     Route::delete('/',[ PosteController::class, 'deleteAll']);
+    Route::get('/find',[ PosteController::class, 'findByTitle']);
+    Route::get('/statistic',[ PosteController::class, 'statistique']);
     Route::get('/{id}',[ PosteController::class, 'get']);
     Route::put('/{id}',[ PosteController::class, 'update']);
-    Route::get('/find',[ PosteController::class, 'findByTitle']);
 
 });
 
-Route::prefix('assister')->group(function () {
+Route::prefix('assistance')->group(function () {
     Route::get('/',[ AssisterController::class, 'getAll']);
     Route::post('/',[ AssisterController::class, 'create']);
     Route::delete('/{id}',[ AssisterController::class, 'delete']);
     Route::delete('/',[ AssisterController::class, 'deleteAll']);
+
+    Route::get('/statistic',[ AssisterController::class, 'statistique']);
+    Route::get('/user/{id}',[ AssisterController::class, 'getByUserId']);
+
     Route::get('/{id}',[ AssisterController::class, 'get']);
     Route::put('/{id}',[ AssisterController::class, 'update']);
 });
@@ -47,7 +55,7 @@ Route::prefix('assister')->group(function () {
         Route::delete('/',[ FormationController::class, 'deleteAll']);
         Route::get('/{id}',[ FormationController::class, 'get']);
         Route::put('/{id}',[ FormationController::class, 'update']);
-        Route::put('/upload',[ FormationController::class, 'upload']);
+        Route::post('/upload',[ FormationController::class, 'upload']);
 
 
 
@@ -71,6 +79,8 @@ Route::prefix('occuper')->group(function () {
     Route::post('/',[ OccuperController::class, 'create']);
     Route::delete('/{id}',[ OccuperController::class, 'delete']);
     Route::delete('/',[ OccuperController::class, 'deleteAll']);
+    Route::get('/user/{id}',[ OccuperController::class, 'getByUserId']);
+
     Route::get('/{id}',[ OccuperController::class, 'get']);
     Route::put('/{id}',[ OccuperController::class, 'update']);
 

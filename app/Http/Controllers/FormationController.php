@@ -8,7 +8,7 @@ class FormationController extends Controller
 {
     //
     public function getAll(){
-        $data = Formation::with('theme')->get();
+        $data = Formation::with('theme')->orderby('date_debut' , 'desc')->with('salaries')->get();
         return response()->json($data, 200);
         //return $data;
         // return Formation::all();
@@ -45,7 +45,7 @@ class FormationController extends Controller
       }
 
       public function get($id){
-        $data = Formation::where('id' , $id)->with('salaries')->first();
+        $data = Formation::where('id' , $id)->with('salaries')->with('theme')->first();
         return response()->json($data, 200);
       }
 
@@ -59,5 +59,11 @@ class FormationController extends Controller
             'message' => "Successfully updated",
             'success' => true
         ], 200);
+      }
+
+
+      public function upload(Request $request){
+          $path = $request->file('image')->store('formations');
+          return ['path'=>$path];
       }
 }

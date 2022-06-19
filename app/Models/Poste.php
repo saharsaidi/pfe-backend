@@ -9,7 +9,7 @@ class Poste extends Model
 {
     use HasFactory;
 
-    protected $table = "poste";
+    protected $table = "postes";
     protected $fillable = [
 
         'title',
@@ -19,4 +19,8 @@ class Poste extends Model
 
 
     ];
+
+    public function occuper(){
+        return $this->hasMany(Occupation::class);
+    }
 }

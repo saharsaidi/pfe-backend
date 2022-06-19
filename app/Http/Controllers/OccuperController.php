@@ -13,6 +13,17 @@ class OccuperController extends Controller
         //return $data;
         // return Occupation::all();
       }
+
+      public function getByUserId($id){
+      //  $data = Occupation::where('user_id' , $id)->join('postes' , 'postes.id' , 'occupations.poste_id')->get()
+
+        // {poste_id : 1 , user_id : 2 , title : 'Angular developer ' , description : 'test test'}
+        $data = Occupation::where('user_id' , $id)->with('poste')->get();
+
+        //{ poste_id : 1 , user_id : 2 , poste : { title : 'angular developer' , description : 'test test'}}
+        return response()->json($data, 200);
+
+      }
       public function deleteAll(){
 
           Occupation::query()->delete();

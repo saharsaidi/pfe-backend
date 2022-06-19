@@ -65,5 +65,18 @@ class PosteController extends Controller
         $data = Poste::find($title);
         return response()->json($data, 200);
       }
+
+
+      public function statistique(){
+        $postes = Poste::all();
+        $labels = array();
+        $valeurs = array();
+        foreach ($postes as $post) {
+            array_push($labels , $post->title);
+            array_push($valeurs , $post->occuper->count());
+        }
+
+        return ['labels'=>$labels , 'valeurs' => $valeurs];
+      }
 }
 

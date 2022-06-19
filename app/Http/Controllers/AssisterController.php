@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Assistance;
+use App\Models\Poste;
 class AssisterController extends Controller
 {
     //
     public function getAll(){
         $data = Assistance::with('user')->with('formation')->get();
+        return response()->json($data, 200);
+        //return $data;
+        // return Assistance::all();
+      }
+
+
+      public function getByUserId($id){
+        $data = Assistance::where('user_id' , $id)->with('formation')->get();
         return response()->json($data, 200);
         //return $data;
         // return Assistance::all();
@@ -59,5 +68,22 @@ class AssisterController extends Controller
             'message' => "Successfully updated",
             'success' => true
         ], 200);
+      }
+
+
+      public function statistique(){
+        $months = ['Janvier' , 'Fevrier' , 'Mars' , 'Avril' , 'Mai' , 'Juin' , 'Juillet' , 'aout' , 'Sept' , 'Oct' , 'Nov' , 'Dec'];
+
+
+        $labels = array();
+        $valeurs = array();
+        for ($i=1; $i <= 12; $i++) {
+            $data = Assistance::whereMonth('created_at' , $i)->get()->count();
+            array_push($labels , $months[$i-1]);
+            array_push($valeurs , $data);
+        }
+
+
+        return ['labels'=>$labels , 'valeurs' => $valeurs];
       }
 }
