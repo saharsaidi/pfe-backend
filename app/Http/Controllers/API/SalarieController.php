@@ -41,6 +41,7 @@ class SalarieController extends Controller
                 $data['salaire'] = $request['salaire'];
                 $data['role'] = $request['role'];
                 $data['date_naissance'] = $request['date_naissance'];
+                $data['image'] = $request['image'];
                 User::create($data);
                 return response()->json([
                     'message' => "Successfully created",

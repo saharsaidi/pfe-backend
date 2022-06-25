@@ -16,6 +16,7 @@ class Salarie extends Model
         'adresse',
         'email',
         'phone',
-        'salaire'
+        'salaire',
+        'image'
       ];
 }

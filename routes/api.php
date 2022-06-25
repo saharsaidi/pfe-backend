@@ -9,6 +9,8 @@ use App\Http\Controllers\AssisterController;
 use App\Http\Controllers\OccuperController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\QuestionController;
 
 
 
@@ -73,6 +75,25 @@ Route::prefix('theme')->group(function () {
 
 
 });
+
+Route::prefix('question')->group(function () {
+    Route::get('/test/{test_id}',[ QuestionController::class, 'getAll']);
+    Route::post('/',[ QuestionController::class, 'create']);
+    Route::delete('/{id}',[ QuestionController::class, 'delete']);
+    Route::get('/{id}',[ QuestionController::class, 'get']);
+    Route::put('/{id}',[ QuestionController::class, 'update']);
+});
+
+Route::prefix('test')->group(function () {
+    Route::get('/',[ TestController::class, 'getAll']);
+    Route::post('/',[ TestController::class, 'create']);
+    Route::delete('/{id}',[ TestController::class, 'delete']);
+    Route::get('/formation/{formation_id}',[ TestController::class, 'getByFormationId']);
+    Route::get('/{id}',[ TestController::class, 'get']);
+    Route::put('/{id}',[ TestController::class, 'update']);
+});
+
+
 
 Route::prefix('occuper')->group(function () {
     Route::get('/',[ OccuperController::class, 'getAll']);
