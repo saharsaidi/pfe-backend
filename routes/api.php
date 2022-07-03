@@ -46,9 +46,12 @@ Route::prefix('assistance')->group(function () {
 
     Route::get('/statistic',[ AssisterController::class, 'statistique']);
     Route::get('/user/{id}',[ AssisterController::class, 'getByUserId']);
-
+    Route::get('/{formation_id}/{user_id}',[ AssisterController::class, 'getScore']);
     Route::get('/{id}',[ AssisterController::class, 'get']);
     Route::put('/{id}',[ AssisterController::class, 'update']);
+
+    Route::put('/{formation_id}/{user_id}',[ AssisterController::class, 'updateScore']);
+
 });
     Route::prefix('formation')->group(function () {
         Route::get('/',[ FormationController::class, 'getAll']);

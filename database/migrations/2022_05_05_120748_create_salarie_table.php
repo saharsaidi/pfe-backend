@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
 
             $table->string('nom_prenom');
-            $table->Date('date_de_naissance');
+            $table->Date('date_naissance');
             $table->string('adresse');
             $table->string('email');
             $table->bigInteger('phone');

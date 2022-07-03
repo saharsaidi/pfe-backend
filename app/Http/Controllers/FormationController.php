@@ -14,7 +14,6 @@ class FormationController extends Controller
         // return Formation::all();
       }
       public function deleteAll(){
-
           Formation::query()->delete();
 
           return response()->json([
@@ -24,10 +23,6 @@ class FormationController extends Controller
         }
 
       public function create(Request $request){
-    /*     $data['title'] = $request['title'];
-        $data['description'] = $request['description'];
-        $data['published'] = $request['published'];
-   */
 
         Formation::create($request->all());
         return response()->json([

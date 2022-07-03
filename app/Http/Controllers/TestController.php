@@ -40,7 +40,8 @@ class TestController extends Controller
       }
 
       public function getByFormationId($formation_id){
-        $data = Test::where('formation_id' , $formation_id)->with('questions')->first();
+        $data = Test::where('formation_id' , $formation_id)->with('questions')->with('formation')->first();
+
         return response()->json($data, 200);
 
       }

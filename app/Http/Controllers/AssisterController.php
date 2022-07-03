@@ -86,4 +86,26 @@ class AssisterController extends Controller
 
         return ['labels'=>$labels , 'valeurs' => $valeurs];
       }
+
+      public function updateScore(Request $request,$formation_id , $user_id){
+        /*   $data['title'] = $request['title'];
+          $data['description'] = $request['description'];
+          $data['published'] = $request['published'];
+     */
+       $assist =  Assistance::where('formation_id' , $formation_id)->where('user_id' , $user_id)->first();
+       if($assist){
+            $assist->niveau = $request->input('niveau');
+            $assist->score = $request->input('score');
+            $assist->save();
+            return $assist;
+        }else{
+            return response()->json(['message'=>'Assistance non existe' , 403]);
+        }
+
+        }
+
+        public function getScore($formation_id , $user_id){
+            $assist =  Assistance::where('formation_id' , $formation_id)->where('user_id' , $user_id)->first();
+            return $assist;
+        }
 }
